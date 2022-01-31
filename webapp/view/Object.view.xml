@@ -1,0 +1,484 @@
+<mvc:View controllerName="jbmeeting.MeetingManager.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.f">
+	<semantic:SemanticPage id="page" class="sapUiNoContentPadding" headerPinnable="false">
+		<semantic:titleHeading>
+			<l:VerticalLayout width="100%">
+				<Title wrapping="true" text="{json>/meeting/MeetingHeaderText}" class="sapUiSmallMarginBottom" visible="{=!${objectView>/changeVisible}}"/>
+				<Input maxLength="128" id="inputMeetingHeader" placeholder="Add title" value="{json>/meeting/MeetingHeaderText}"
+					visible="{objectView>/changeVisible}"/>
+			</l:VerticalLayout>
+		</semantic:titleHeading>
+		<semantic:titleSnappedContent>
+			<!--Snapped SubHeader View Mode-->
+			<l:VerticalLayout width="100%" visible="{=!${objectView>/changeVisible}}">
+				<l:BlockLayout>
+					<l:BlockLayoutRow class="sapUiNoContentPadding sapUiSmallMarginBottom">
+						<l:BlockLayoutCell width="3" class="sapUiTinyMarginBottom sapUiSmallMarginEnd">
+							<HBox>
+								<core:Icon src="sap-icon://history" class="sapUiSmallMarginEnd" tooltip="Date and time"/>
+								<Text
+									text="{path: 'json>/meeting/DateFrom' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'EEEE, d MMMM HH:mm' } } – {path: 'json>/meeting/DateTo' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'HH:mm' } } "/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="1" class="sapUiTinyMarginBottom sapUiSmallMarginEnd">
+							<HBox>
+								<core:Icon src="sap-icon://lateness" class="sapUiSmallMarginEnd" tooltip="Duration"/>
+								<Text text="{objectView>/Duration}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="2" class="sapUiTinyMarginBottom sapUiSmallMarginEnd">
+							<HBox>
+								<core:Icon src="{json>/meeting/MeetingTypeIcon}" tooltip="Type" class="sapUiSmallMarginEnd"/>
+								<Text text="{json>/meeting/MeetingTypeText}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="2">
+							<HBox>
+								<core:Icon src="{json>/meeting/MeetingStatusIcon}" color="{json>/meeting/MeetingStatusIconColor}" tooltip="Status"
+									class="sapUiSmallMarginEnd"/>
+								<Text text="{json>/meeting/MeetingStatusText}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="7"/>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+			<!--Snapped SubHeader Edit Mode-->
+			<l:VerticalLayout width="100%" visible="{objectView>/changeVisible}">
+				<l:BlockLayout>
+					<l:BlockLayoutRow class="sapUiNoContentPadding sapUiSmallMarginTop">
+						<l:BlockLayoutCell width="2" class="sapUiTinyMarginBottom">
+							<HBox alignItems="Center" class="sapUiLargeMarginEnd">
+								<core:Icon src="sap-icon://history" class="sapUiSmallMarginEnd" tooltip="Date and time"/>
+								<DatePicker width="10rem"
+									value="{path: 'json>/meeting/DateFrom' , type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'EEE, d MMMM Y' } }"
+									class="sapUiSmallMarginEnd"/>
+								<TimePicker id="DateFrom" width="5.2rem" minutesStep="15"
+									value="{path: 'json>/meeting/DateFrom' , type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm' } }" class="sapUiSmallMarginEnd"/>
+								<Title text="—" class="sapUiSmallMarginEnd"/>
+								<TimePicker id="DateTo" width="5.2rem" minutesStep="15"
+									value="{path: 'json>/meeting/DateTo' , type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm' } }"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell class="sapUiTinyMarginBottom">
+							<Select width="auto" items="{ path: '/jbmeeting_base_MeetingTypes'}" selectedKey="{json>/meeting/MeetingTypeID}" class="sapUiLargeMarginEnd"
+								change="onMeetingUpdateMeetingType">
+								<core:ListItem key="{MeetingTypeID}" text="{MeetingTypeText}" icon="{MeetingTypeIcon}"/>
+							</Select>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="3">
+							<HBox alignItems="Center" class="sapUiTinyMarginTop sapUiTinyMarginBottom">
+								<core:Icon src="{json>/meeting/MeetingStatusIcon}" color="{json>/meeting/MeetingStatusIconColor}" tooltip="Status"
+									class="sapUiSmallMarginEnd"/>
+								<Text text="{json>/meeting/MeetingStatusText}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+		</semantic:titleSnappedContent>
+		<semantic:titleExpandedContent>
+			<!--Expanded SubHeader View Mode-->
+			<l:VerticalLayout width="100%" visible="{=!${objectView>/changeVisible}}">
+				<l:BlockLayout>
+					<l:BlockLayoutRow class="sapUiNoContentPadding">
+						<l:BlockLayoutCell width="3" class="sapUiTinyMarginBottom sapUiSmallMarginEnd">
+							<HBox>
+								<core:Icon src="sap-icon://history" class="sapUiSmallMarginEnd" tooltip="Date and time"/>
+								<Text
+									text="{path: 'json>/meeting/DateFrom' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'EEEE, d MMMM HH:mm' } } – {path: 'json>/meeting/DateTo' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'HH:mm' } } "/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="1" class="sapUiTinyMarginBottom sapUiSmallMarginEnd">
+							<HBox>
+								<core:Icon src="sap-icon://lateness" class="sapUiSmallMarginEnd" tooltip="Duration"/>
+								<Text text="{objectView>/Duration}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="2" class="sapUiTinyMarginBottom sapUiSmallMarginEnd">
+							<HBox>
+								<core:Icon src="{json>/meeting/MeetingTypeIcon}" tooltip="Type" class="sapUiSmallMarginEnd"/>
+								<Text text="{json>/meeting/MeetingTypeText}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="2">
+							<HBox>
+								<core:Icon src="{json>/meeting/MeetingStatusIcon}" color="{json>/meeting/MeetingStatusIconColor}" tooltip="Status"
+									class="sapUiSmallMarginEnd"/>
+								<Text text="{json>/meeting/MeetingStatusText}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="7"/>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+			<!--Expanded SubHeader Edit Mode-->
+			<l:VerticalLayout width="100%" visible="{objectView>/changeVisible}">
+				<l:BlockLayout>
+					<l:BlockLayoutRow class="sapUiNoContentPadding sapUiSmallMarginTop">
+						<l:BlockLayoutCell width="2" class="sapUiTinyMarginBottom">
+							<HBox alignItems="Center" class="sapUiLargeMarginEnd">
+								<core:Icon src="sap-icon://history" class="sapUiSmallMarginEnd" tooltip="Date and time"/>
+								<DatePicker width="10rem"
+									value="{path: 'json>/meeting/DateFrom' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'EEE, d MMM Y' } }"
+									class="sapUiSmallMarginEnd"/>
+								<TimePicker width="5.2rem" minutesStep="15"
+									value="{path: 'json>/meeting/DateFrom' , type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm' } }" class="sapUiSmallMarginEnd"/>
+								<Title text="—" class="sapUiSmallMarginEnd"/>
+								<TimePicker width="5.2rem" minutesStep="15"
+									value="{path: 'json>/meeting/DateTo' , type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm' } }"/>
+							</HBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell class="sapUiTinyMarginBottom">
+							<Select width="auto" items="{ path: '/jbmeeting_base_MeetingTypes'}" selectedKey="{json>/meeting/MeetingTypeID}" class="sapUiLargeMarginEnd"
+								change="onMeetingUpdateMeetingType">
+								<core:ListItem key="{MeetingTypeID}" text="{MeetingTypeText}" icon="{MeetingTypeIcon}"/>
+							</Select>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="3">
+							<HBox alignItems="Center" class="sapUiTinyMarginTop">
+								<core:Icon src="{json>/meeting/MeetingStatusIcon}" color="{json>/meeting/MeetingStatusIconColor}" tooltip="Status"
+									class="sapUiSmallMarginEnd"/>
+								<Text text="{json>/meeting/MeetingStatusText}"/>
+							</HBox>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+		</semantic:titleExpandedContent>
+		<semantic:titleCustomTextActions>
+			<Button icon="sap-icon://edit" text="Edit" tooltip="Edit meeting info" class="sapMBtnAccept" visible="{=!${objectView>/changeVisible}}"
+				press="onPressEdit" id="btnMeetingEdit"/>
+			<Button icon="sap-icon://refresh" text="Refresh" tooltip="Refresh meeting" visible="{=!${objectView>/changeVisible}}" press="onPressRefresh"
+				id="btnMeetingRefresh"/>
+			<Button icon="sap-icon://save" type="Emphasized" text="Save" tooltip="Save"
+				visible="{= ${objectView>/creation} === false ? ${objectView>/changeVisible} : false}" press="onPressSubmitChanges" id="btnMeetingSave"/>
+			<Button icon="sap-icon://sys-cancel" text="Cancel" tooltip="Cancel"
+				visible="{= ${objectView>/creation} === false ? ${objectView>/changeVisible} : false}" press="onPressResetChanges" id="btnMeetingCancel"/>
+			<Button icon="sap-icon://delete" text="Delete" tooltip="Delete meeting"
+				visible="{= ${objectView>/creation} === false ? ${objectView>/changeVisible} : false}" press="onPressDelete" id="btnMeetingDelete"/>
+			<Button text="Create" tooltip="Create Meeting" visible="{objectView>/creation}" press="onMeetingCreate" id="btnMeetingCreate"/>
+			<Button icon="sap-icon://decline" tooltip="Close window" visible="{objectView>/creation}" press="onApproveMeetingClosing"
+				id="btnMeetingDecline"/>
+		</semantic:titleCustomTextActions>
+		<semantic:headerContent>
+			<!--Header Info View Mode-->
+			<l:VerticalLayout visible="{=!${objectView>/changeVisible}}" width="100%">
+				<l:BlockLayout >
+					<l:BlockLayoutRow class="sapUiNoContentPadding">
+						<l:BlockLayoutCell>
+							<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+								<core:Icon src="sap-icon://suitcase" tooltip="Project" class="sapUiTinyMarginEnd"/>
+								<Label text="Project:" class="sapUiSmallMarginEnd" design="Bold"/>
+							</HBox>
+							<Text text="Разработка приложения jbmeeting" class="sapUiMediumMarginBottom"/>
+							<HBox class="sapUiTinyMarginBottom">
+								<core:Icon src="sap-icon://map" tooltip="Location" class="sapUiTinyMarginEnd"/>
+								<Label text="Location:" class="sapUiSmallMarginEnd" design="Bold"/>
+							</HBox>
+							<Text text="{json>/meeting/Location}"/>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="3">
+							<HBox class="sapUiTinyMarginBottom">
+								<core:Icon src="sap-icon://text-align-left" tooltip="Description" class="sapUiTinyMarginEnd"/>
+								<Label text="Description:" class="sapUiSmallMarginEnd" design="Bold"/>
+							</HBox>
+							<ScrollContainer height="6.7em" vertical="true">
+								<Text text="{json>/meeting/MeetingHeaderDescription}"/>
+							</ScrollContainer>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+			<!--Header Info Edit Mode-->
+			<l:VerticalLayout visible="{objectView>/changeVisible}" width="100%">
+				<l:BlockLayout>
+					<l:BlockLayoutRow class="sapUiNoContentPadding">
+						<l:BlockLayoutCell class="sapUiSmallMarginEnd">
+							<HBox>
+								<core:Icon src="sap-icon://suitcase" tooltip="Project" class="sapUiTinyMarginEnd"/>
+								<Label text="Project:" class="sapUiSmallMarginEnd" design="Bold"/>
+							</HBox>
+							<Select width="100%" items="{ path: '/jbmeeting_base_MeetingTypes'}" class="sapUiMediumMarginBottom">
+								<core:ListItem text="{MeetingTypeText}"/>
+							</Select>
+							<HBox>
+								<core:Icon src="sap-icon://map" tooltip="Location" class="sapUiTinyMarginEnd"/>
+								<Label text="Location:" design="Bold"/>
+							</HBox>
+							<Input maxLength="256" width="100%" value="{json>/meeting/Location}" placeholder="Add location"/>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="3">
+							<HBox>
+								<core:Icon src="sap-icon://text-align-left" tooltip="Description" class="sapUiTinyMarginEnd"/>
+								<Label text="Description:" design="Bold"/>
+							</HBox>
+							<TextArea value="{json>/meeting/MeetingHeaderDescription}" placeholder="Add description" width="100%" height="6.7em"/>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+		</semantic:headerContent>
+		<semantic:content class="sapUiNoContentPadding">
+			<l:ResponsiveSplitter defaultPane="default" width="100%">
+				<l:PaneContainer>
+					<!--Participants-->
+					<l:SplitPane requiredParentWidth="400">
+						<Table sticky="HeaderToolbar" id="participantsTable" noDataText="You have not added any participants to this meeting yet" width="100%"
+							updateFinished="onUpdateFinishedParticipants" items="{json>/participants}">
+							<headerToolbar>
+								<OverflowToolbar >
+									<content>
+										<Title text="{objectView>/participantsTableTitle}"/>
+										<ToolbarSpacer/>
+										<ComboBox id="comboboxAddParticipant" visible="{objectView>/changeVisible}" placeholder="Add participant"
+											items="{ path: '/jbmeeting_base_Employees', sorter: {path: 'EmployeeID'}}" change="onParticipantCreate">
+											<core:Item key="{EmployeeID}" text="{EmployeeFirstName} {EmployeeLastName}"/>
+										</ComboBox>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="14em"/>
+								<Column width="4em"/>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<HBox alignItems="Center">
+											<Avatar src="{json>AvatarURL_16x16}" press="onPressAvatar" badgeIcon="{json>ConfirmationIcon}"/>
+											<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+												<Title text="{json>EmployeeText}"/>
+												<Label text="{json>MeetingRoleText}" visible="{=!${objectView>/changeVisible}}"/>
+												<Select visible="{objectView>/changeVisible}" change="onParticipantUpdateMeetingRole"
+													items="{ path: '/jbmeeting_base_MeetingRoles', templateShareable: false}" selectedKey="{json>MeetingRoleID}">
+													<core:ListItem key="{MeetingRoleID}" text="{MeetingRoleText}"/>
+												</Select>
+											</VBox>
+										</HBox>
+										<HBox>
+											<Button visible="{objectView>/changeVisible}" type="Transparent"
+												tooltip="{= ${json>Mandatory} === 'X' ? 'Presence is required. Click to change' : 'Presence is optional. Click to change'}"
+												icon="{= ${json>Mandatory} === 'X' ? 'sap-icon://favorite' : 'sap-icon://unfavorite'}" press="onParticipantUpdateMandatory"/>
+											<Button visible="{objectView>/changeVisible}" type="Transparent" tooltip="Delete" icon="sap-icon://delete" press="onParticipantDelete"/>
+											<core:Icon visible="{= !${objectView>/changeVisible}}" src="{= ${json>Mandatory} === 'X' ? 'sap-icon://favorite' : 'sap-icon://unfavorite'}"
+												color="Marker" tooltip="{= ${json>Mandatory} === 'X' ? 'Presence is required' : 'Presence is optional'}" class="sapUiSmallMarginBegin"/>
+											<!--<Button id="popover" visible="{objectView>/changeVisible}" type="Transparent" icon="sap-icon://meeting-room" tooltip="Change role"-->
+											<!--	press="onPopoverOpen"/>-->
+										</HBox>
+									</cells>
+								</ColumnListItem>
+							</items>
+							<layoutData>
+								<l:SplitterLayoutData size="25%"/>
+							</layoutData>
+						</Table>
+					</l:SplitPane>
+					<!--Agendas-->
+					<l:SplitPane requiredParentWidth="900" id="default">
+						<Table sticky="HeaderToolbar" id="agendasTable" noDataText="There are no agendas for this meeting according to these filters" width="100%"
+							items="{path: 'json>/agendas', sorter: {path: 'AgendaID', descending: true}}" updateFinished="onUpdateFinishedAgendas">
+							<headerToolbar>
+								<OverflowToolbar >
+									<content>
+										<Title text="{objectView>/agendasTableTitle}"/>
+										<ToolbarSpacer/>
+										<SegmentedButton selectedKey="all" selectionChange="onSelectionChange">
+											<items>
+												<SegmentedButtonItem id="SegmentedButtonItem1" tooltip="Active" icon="sap-icon://media-play" key="01"/>
+												<SegmentedButtonItem id="SegmentedButtonItem2" tooltip="On hold" icon="sap-icon://history" key="02"/>
+												<SegmentedButtonItem id="SegmentedButtonItem3" tooltip="Completed" icon="sap-icon://message-success" key="03"/>
+												<SegmentedButtonItem id="SegmentedButtonItem4" tooltip="Cancelled" icon="sap-icon://sys-cancel" key="04"/>
+												<SegmentedButtonItem text="All" key="all"/>
+											</items>
+										</SegmentedButton>
+										<Button id="btnAddAgenda" text="Add" type="Emphasized" tooltip="Add Agenda" visible="{objectView>/changeVisible}" press="onAgendaCreate"/>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column/>
+							</columns>
+							<ColumnListItem>
+								<cells>
+									<l:VerticalLayout width="100%">
+										<!--View Mode-->
+										<l:BlockLayout id="agendaView" visible="{= ${json>Mode} === 'view' ? true : false}">
+											<l:BlockLayoutRow class="sapUiNoContentPadding">
+												<l:BlockLayoutCell width="2" class="sapUiSmallMarginTopBottom">
+													<HBox>
+														<Label text="Priority:" design="Bold" class="sapUiTinyMarginEnd"/>
+														<core:Icon src="{json>PriorityIcon}" color="{json>PriorityIconColor}" tooltip="Priority"/>
+														<Text text="{json>PriorityText}" class="sapUiTinyMarginBegin"/>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell width="2" class="sapUiSmallMarginTopBottom">
+													<HBox>
+														<Label text="Status:" design="Bold" class="sapUiTinyMarginEnd"/>
+														<core:Icon src="{json>StatusIcon}" color="{json>StatusIconColor}" tooltip="Status"/>
+														<Text text="{json>StatusText}" class="sapUiTinyMarginBegin"/>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell width="3" class="sapUiSmallMarginTopBottom">
+													<HBox>
+														<core:Icon src="sap-icon://activity-individual"/>
+														<Label text="Responsible:" design="Bold" class="sapUiTinyMarginBeginEnd"/>
+														<Avatar displaySize="XS" class="responsibleAvatar" tooltip="Responsible"
+															src="https://free-png.ru/wp-content/uploads/2020/11/b64cc812d68e951149b3e1a21c9a49e7-35dd74d8.png"/>
+														<Text text="Andrey Tankevich" class="sapUiTinyMarginBegin"/>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell class="sapUiSmallMarginBottom sapUiTinyMarginTop">
+													<HBox>
+														<Button type="Transparent" icon="sap-icon://thumb-up"/>
+														<Button type="Transparent" icon="sap-icon://thumb-down"/>
+														<Text text="|" class="sapUiTinyMarginTop"/>
+														<Button visible="{= !${objectView>/changeVisible}}" type="Transparent" tooltip="Attachments" icon="sap-icon://chain-link"/>
+														<Button visible="{= !${objectView>/changeVisible}}" type="Transparent" tooltip="Comments" icon="sap-icon://comment"/>
+														<Button visible="{objectView>/changeVisible}" id="btnAgendaEdit" type="Transparent" tooltip="Edit agenda" icon="sap-icon://edit"
+															press="onAgendaEdit"/>
+														<Button visible="{objectView>/changeVisible}" type="Transparent" tooltip="Delete agenda" icon="sap-icon://delete"
+															press="onAgendaApproveDelete"/>
+													</HBox>
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+											<l:BlockLayoutRow class="sapUiNoContentPadding">
+												<l:BlockLayoutCell class="sapUiSmallMarginBottom">
+													<HBox>
+														<core:Icon src="sap-icon://task" tooltip="Task"/>
+														<Label text="Task:" design="Bold" class="sapUiTinyMarginBeginEnd"/>
+														<Text text="jbmeeting: Перевести сущность MeetingHeaders в JSON"/>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell class="sapUiSmallMarginBottom">
+													<HBox>
+														<core:Icon src="sap-icon://user-settings"/>
+														<Label text="Created:" design="Bold" class="sapUiTinyMarginBeginEnd"/>
+														<Text text="{path: 'json>Created' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'd MMMM HH:mm' }} by"
+															class="sapUiTinyMarginEnd"/>
+														<Avatar displaySize="XS" tooltip="Created by" src="{json>CreatedByAvatar}" class="responsibleAvatar sapUiTinyMarginEnd"/>
+														<Text text="{path: 'json>CreatedByFullName'}"/>
+														<HBox
+															visible="{= ${path: 'json>Modified', formatter: '.formatter.toString'} === ${path: 'json>Created', formatter: '.formatter.toString'} ? false : true}">
+															<Text text="·" class="sapUiTinyMarginBeginEnd"/>
+															<Text text="Modified"
+																tooltip="Modified {path: 'json>Modified' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'd MMMM HH:mm' }} by {json>ModifiedByFullName}"/>
+														</HBox>
+													</HBox>
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+											<l:BlockLayoutRow class="sapUiNoContentPadding sapUiSmallMarginBottom">
+												<l:BlockLayoutCell>
+													<HBox>
+														<core:Icon src="sap-icon://question-mark"/>
+														<Label text="Question:" design="Bold" class="sapUiTinyMarginBegin"/>
+													</HBox>
+													<!--<ScrollContainer height="5em" vertical="true" class="sapUiSmallMarginEnd">-->
+														<Text text="{json>Question}"  class="sapUiSmallMarginEnd"/>
+													<!--</ScrollContainer>-->
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell>
+													<VBox>
+														<HBox>
+															<core:Icon src="sap-icon://decision"/>
+															<Label text="Resolution:" design="Bold" class="sapUiTinyMarginBegin"/>
+														</HBox>
+														<!--<ScrollContainer height="5em" vertical="true">-->
+															<Text text="{json>Resolution}"/>
+														<!--</ScrollContainer>-->
+													</VBox>
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+										</l:BlockLayout>
+										<!--Edit mode-->
+										<l:BlockLayout visible="{= ${json>Mode} === 'view' ? false : true}" id="agendaEdit">
+											<l:BlockLayoutRow class="sapUiNoContentPadding">
+												<l:BlockLayoutCell width="5" class="sapUiSmallMarginTopBottom">
+													<HBox alignItems="Center">
+														<Label text="Priority:" design="Bold" class="sapUiTinyMarginEnd"/>
+														<Select change="onAgendaUpdatePriority" width="150px" items="{ path: '/jbmeeting_base_Priorities', templateShareable: false}"
+															selectedKey="{json>PriorityID}">
+															<core:ListItem text="{PriorityText}" icon="{PriorityIcon}" key="{PriorityID}"/>
+														</Select>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell width="5" class="sapUiSmallMarginTopBottom">
+													<HBox alignItems="Center">
+														<Label text="Status:" design="Bold" class="sapUiTinyMarginEnd"/>
+														<Select change="onAgendaUpdateStatus" items="{ path: '/jbmeeting_base_Statuses', templateShareable: false}" selectedKey="{json>StatusID}">
+															<core:ListItem text="{StatusText}" icon="{StatusIcon}" key="{StatusID}"/>
+														</Select>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell width="8" class="sapUiSmallMarginTopBottom">
+													<HBox alignItems="Center">
+														<core:Icon src="sap-icon://activity-individual"/>
+														<Label text="Responsible:" design="Bold" class="sapUiTinyMarginBeginEnd"/>
+														<Select items="{ path: '/jbmeeting_base_Employees', templateShareable: false}">
+															<core:ListItem text="{EmployeeFirstName} {EmployeeLastName}" key="{EmployeeID}"/>
+														</Select>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell width="2" class="sapUiSmallMarginBottom sapUiTinyMarginTop">
+													<HBox>
+														<Button type="Transparent" tooltip="Done" icon="sap-icon://sys-enter" press="onAgendaDone"/>
+														<Button type="Transparent" visible="{= ${json>Mode} === 'create' ? false : true}" tooltip="Cancel" icon="sap-icon://sys-cancel"
+															press="onAgendaCancel"/>
+														<Button type="Transparent" tooltip="Delete agenda" icon="sap-icon://delete" press="onAgendaApproveDelete"/>
+													</HBox>
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+											<l:BlockLayoutRow class="sapUiNoContentPadding">
+												<l:BlockLayoutCell class="sapUiSmallMarginBottom">
+													<HBox alignItems="Center">
+														<core:Icon src="sap-icon://task" tooltip="Task"/>
+														<Label text="Task:" design="Bold" class="sapUiTinyMarginBeginEnd"/>
+														<Select width="250px" items="{ path: '/jbmeeting_base_Employees', templateShareable: false}">
+															<core:ListItem text="{EmployeeFirstName} {EmployeeLastName}" key="{EmployeeID}"/>
+														</Select>
+													</HBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell class="sapUiSmallMarginBottom">
+													<HBox>
+														<core:Icon src="sap-icon://user-settings"/>
+														<Label text="Created:" design="Bold" class="sapUiTinyMarginBeginEnd"/>
+														<Text text="{path: 'json>Created' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'd MMMM HH:mm' }} by"
+															class="sapUiTinyMarginEnd"/>
+														<Avatar displaySize="XS" tooltip="Created by" src="{json>CreatedByAvatar}" class="responsibleAvatar sapUiTinyMarginEnd"/>
+														<Text text="{path: 'json>CreatedByFullName'}"/>
+														<HBox
+															visible="{= ${path: 'json>Modified', formatter: '.formatter.toString'} === ${path: 'json>Created', formatter: '.formatter.toString'} ? false : true}">
+															<Text text="·" class="sapUiTinyMarginBeginEnd"/>
+															<Text text="Modified"
+																tooltip="Modified {path: 'json>Modified' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'd MMMM HH:mm' }} by {json>ModifiedByFullName}"/>
+														</HBox>
+													</HBox>
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+											<l:BlockLayoutRow class="sapUiNoContentPadding sapUiSmallMarginBottom">
+												<l:BlockLayoutCell class="sapUiTinyMarginBottom">
+													<HBox>
+														<core:Icon src="sap-icon://question-mark"/>
+														<Label text="Question:" design="Bold" class="sapUiTinyMarginBegin"/>
+													</HBox>
+													<TextArea value="{json>Question}" height="5em" width="98%"/>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell>
+													<HBox>
+														<core:Icon src="sap-icon://decision"/>
+														<Label text="Resolution:" design="Bold" class="sapUiTinyMarginBegin"/>
+													</HBox>
+													<TextArea value="{json>Resolution}" width="100%" height="5em"/>
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+										</l:BlockLayout>
+									</l:VerticalLayout>
+								</cells>
+							</ColumnListItem>
+						</Table>
+					</l:SplitPane>
+				</l:PaneContainer>
+			</l:ResponsiveSplitter>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>

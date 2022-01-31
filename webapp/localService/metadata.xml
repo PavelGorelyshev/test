@@ -1,0 +1,177 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="jetCloud.apps.jbmeeting.MeetingManager.v01.01">
+            <EntityType Name="jbmeeting_base_AgendasType">
+                <Key>
+                    <PropertyRef Name="AgendaID"/>
+                    <PropertyRef Name="MeetingHeaderID"/>
+                </Key>
+                <Property Name="AgendaID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="AgendaItem" Type="Edm.String" MaxLength="64"/>
+                <Property Name="MeetingHeaderID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="StatusID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="StatusText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="StatusIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="StatusIconColor" Type="Edm.String" MaxLength="16"/>
+                <Property Name="PriorityID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PriorityText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="PriorityIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="PriorityIconColor" Type="Edm.String" MaxLength="16"/>
+                <Property Name="ProjectID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ProjectText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="TaskID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TaskTaskKey" Type="Edm.String" MaxLength="128"/>
+                <Property Name="TaskSummary" Type="Edm.String" MaxLength="255"/>
+                <Property Name="TaskStatusesText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="ResponsibleID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EmployeeFirstName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeLastName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeFullName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeShortName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_16x16" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_24x24" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_32x32" Type="Edm.String" MaxLength="128"/>
+                <Property Name="Question" Type="Edm.String" MaxLength="2147483647"/>
+                <Property Name="Resolution" Type="Edm.String" MaxLength="2147483647"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_AttendanceType">
+                <Key>
+                    <PropertyRef Name="AttendanceID"/>
+                </Key>
+                <Property Name="AttendanceID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="AttendanceText" Type="Edm.String" MaxLength="64"/>
+                <Property Name="AttendanceIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="AttendanceIconColor" Type="Edm.String" MaxLength="16"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_ConfirmationsType">
+                <Key>
+                    <PropertyRef Name="ConfirmationID"/>
+                </Key>
+                <Property Name="ConfirmationID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ConfirmationText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="ConfirmationIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="ConfirmationIconColor" Type="Edm.String" MaxLength="16"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_MeetingHeadersType">
+                <Key>
+                    <PropertyRef Name="MeetingHeaderID"/>
+                </Key>
+                <Property Name="MeetingHeaderID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="MeetingHeaderText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="MeetingHeaderDescription" Type="Edm.String" MaxLength="2147483647"/>
+                <Property Name="DateFrom" Type="Edm.DateTime"/>
+                <Property Name="DateTo" Type="Edm.DateTime"/>
+                <Property Name="Location" Type="Edm.String" MaxLength="256"/>
+                <Property Name="OrganizerID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EmployeeFirstName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeLastName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeFullName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeShortName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_16x16" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_24x24" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_32x32" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_48x48" Type="Edm.String" MaxLength="128"/>
+                <Property Name="MeetingTypeID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MeetingTypeText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="MeetingTypeIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="MeetingTypeIconColor" Type="Edm.String" MaxLength="16"/>
+                <Property Name="MeetingStatusID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MeetingStatusText" Type="Edm.String" MaxLength="64"/>
+                <Property Name="MeetingStatusIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="MeetingStatusIconColor" Type="Edm.String" MaxLength="16"/>
+                <Property Name="ProjectID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ProjectText" Type="Edm.String" MaxLength="128"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_MeetingRolesType">
+                <Key>
+                    <PropertyRef Name="MeetingRoleID"/>
+                </Key>
+                <Property Name="MeetingRoleID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="MeetingRoleText" Type="Edm.String" MaxLength="64"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_MeetingStatusesType">
+                <Key>
+                    <PropertyRef Name="MeetingStatusID"/>
+                </Key>
+                <Property Name="MeetingStatusID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="MeetingStatusText" Type="Edm.String" MaxLength="64"/>
+                <Property Name="MeetingStatusIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="MeetingStatusIconColor" Type="Edm.String" MaxLength="16"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_MeetingTypesType">
+                <Key>
+                    <PropertyRef Name="MeetingTypeID"/>
+                </Key>
+                <Property Name="MeetingTypeID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="MeetingTypeText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="MeetingTypeIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="MeetingTypeIconColor" Type="Edm.String" MaxLength="16"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_ParticipantsType">
+                <Key>
+                    <PropertyRef Name="ParticipantID"/>
+                    <PropertyRef Name="MeetingHeaderID"/>
+                </Key>
+                <Property Name="ParticipantID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="MeetingHeaderID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="EmployeeID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EmployeeFirstName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeLastName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeFullName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="EmployeeShortName" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_16x16" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_24x24" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_32x32" Type="Edm.String" MaxLength="128"/>
+                <Property Name="AvatarURL_48x48" Type="Edm.String" MaxLength="128"/>
+                <Property Name="MeetingRoleID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MeetingRoleText" Type="Edm.String" MaxLength="64"/>
+                <Property Name="ConfirmationID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConfirmationText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="ConfirmationIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="ConfirmationIconColor" Type="Edm.String" MaxLength="16"/>
+                <Property Name="AttendanceID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="AttendanceText" Type="Edm.String" MaxLength="64"/>
+                <Property Name="AttendanceIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="AttendanceIconColor" Type="Edm.String" MaxLength="16"/>
+                <Property Name="Mandatory" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_PrioritiesType">
+                <Key>
+                    <PropertyRef Name="PriorityID"/>
+                </Key>
+                <Property Name="PriorityID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="PriorityText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="PriorityIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="PriorityIconColor" Type="Edm.String" MaxLength="16"/>
+            </EntityType>
+            <EntityType Name="jbmeeting_base_StatusesType">
+                <Key>
+                    <PropertyRef Name="StatusID"/>
+                </Key>
+                <Property Name="Version" Type="Edm.String" DefaultValue="A" MaxLength="1"/>
+                <Property Name="StatusID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="StatusText" Type="Edm.String" MaxLength="128"/>
+                <Property Name="StatusIcon" Type="Edm.String" MaxLength="64"/>
+                <Property Name="StatusIconColor" Type="Edm.String" MaxLength="16"/>
+            </EntityType>
+            <EntityContainer Name="01" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="jbmeeting_base_Agendas" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_AgendasType"/>
+                <EntitySet Name="jbmeeting_base_Attendance" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_AttendanceType"/>
+                <EntitySet Name="jbmeeting_base_Confirmations" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_ConfirmationsType"/>
+                <EntitySet Name="jbmeeting_base_MeetingHeaders" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_MeetingHeadersType"/>
+                <EntitySet Name="jbmeeting_base_MeetingRoles" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_MeetingRolesType"/>
+                <EntitySet Name="jbmeeting_base_MeetingStatuses" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_MeetingStatusesType"/>
+                <EntitySet Name="jbmeeting_base_MeetingTypes" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_MeetingTypesType"/>
+                <EntitySet Name="jbmeeting_base_Participants" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_ParticipantsType"/>
+                <EntitySet Name="jbmeeting_base_Priorities" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_PrioritiesType"/>
+                <EntitySet Name="jbmeeting_base_Statuses" EntityType="jetCloud.apps.jbmeeting.MeetingManager.v01.01.jbmeeting_base_StatusesType"/>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

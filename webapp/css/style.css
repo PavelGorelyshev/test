@@ -1,0 +1,127 @@
+.responsibleAvatar {
+    height: 1rem;
+    width: 1rem;
+}
+
+/*Color selects*/
+
+
+/*red*/
+
+/*[data-sap-ui-icon-content=""] {*/
+/*    color: #BB0000;*/
+/*}*/
+
+
+/*orange*/
+
+/*[data-sap-ui-icon-content=""],*/
+/*[data-sap-ui-icon-content=""] {*/
+/*    color: #E78C07;*/
+/*}*/
+
+
+/*blue*/
+
+/*[data-sap-ui-icon-content=""],*/
+/*[data-sap-ui-icon-content=""] {*/
+/*    color: #427cac;*/
+/*}*/
+
+
+/*green*/
+
+/*[data-sap-ui-icon-content=""],*/
+/*[data-sap-ui-icon-content=""] {*/
+/*    color: #2B7D2B;*/
+/*}*/
+
+
+/*grey*/
+
+/*[data-sap-ui-icon-content=""] {*/
+/*    color: #5E696E;*/
+/*}*/
+
+
+/*Color badges*/
+
+
+/*yes*/
+
+[data-sap-ui-icon-content=""] {
+    background-color: #2B7D2B;
+    border: .0625rem solid #2B7D2B;
+    border-radius: 50%;
+}
+
+
+/*no*/
+
+[data-sap-ui-icon-content=""] {
+    background-color: #BB0000;
+    border: .0625rem solid #BB0000;
+    border-radius: 50%;
+}
+
+
+/*segmented buttons colors*/
+
+#MeetingManager---object--SegmentedButtonItem1-button-img {
+    color: #E78C07;
+}
+
+#MeetingManager---object--SegmentedButtonItem2-button-img {
+    color: #427cac;
+}
+
+#MeetingManager---object--SegmentedButtonItem3-button-img {
+    color: #2B7D2B;
+}
+
+#MeetingManager---object--SegmentedButtonItem4-button-img {
+    color: #5E696E;
+}
+
+.sapMSegBBtnSel .sapMSegBBtnInner .sapUiIcon {
+    color: #fff !important;
+}
+
+
+/*Responsive header */
+
+.sapFDynamicPageTitleMainHeading {
+    width: 78%;
+}
+
+.sapFDynamicPageTitleMainHeadingInner {
+    width: 100%;
+}
+
+
+/*Input Title*/
+
+#MeetingManager---object--inputMeetingHeader-inner {
+    font-size: 1.25rem;
+    border-bottom: .0625rem solid;
+    padding: 0;
+}
+
+#MeetingManager---object--inputMeetingHeader-inner:focus{
+    border-bottom: .15rem solid #427cac;
+}
+
+#MeetingManager---object--inputMeetingHeader-inner::placeholder {
+    font-size: 1.25rem;
+    border-bottom: .0625rem solid;
+    padding: 0;
+}
+
+#MeetingManager---object--inputMeetingHeader-content {
+    border: none;
+    outline: none;
+}
+
+#MeetingManager---object--page-pageTitle {
+    background: white;
+}

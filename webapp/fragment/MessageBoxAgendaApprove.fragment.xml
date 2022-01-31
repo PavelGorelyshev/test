@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Dialog id="ApproveAgendaDialog" title="Save changes to the Agenda?" icon="sap-icon://question-mark" type="Message" contentHeight="100%">
+		<Page showHeader="false" >
+			<!--<headerContent>-->
+			<!--	<Text text="abc"/>-->
+			<!--</headerContent>-->
+			<content>
+				<Text text="abc"/>
+			</content>
+			
+			<footer>
+				<Toolbar>
+					<ToolbarSpacer/>
+					<Button text="Add" press="onAgendaCreate" type="Emphasized"/>
+					<Button text="Cancel" press="onDialogClose"/>
+				</Toolbar>
+			</footer>
+		</Page>
+	</Dialog>
+</core:FragmentDefinition>

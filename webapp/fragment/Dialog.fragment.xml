@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Dialog id="editableAgendaDialog" title="New agenda" contentHeight="60%" contentWidth="20%" resizable="true" draggable="true">
+		<Page showHeader="false" class="sapUiContentPadding">
+			<content>
+				<l:VerticalLayout width="100%">
+					<Label text="Title" required="true"/>
+					<Input></Input>
+					<Label text="Priority" required="true" class="sapUiTinyMarginTop"/>
+					<Select change="onChangeStatus" items="{ path: '/jbmeeting_base_Priorities'}" width="100%">
+						<core:ListItem text="{PriorityText}" icon="{PriorityIcon}" key="{PriorityID}"/>
+					</Select>
+					<Label text="Responsible" required="true" class="sapUiTinyMarginTop"/>
+					<Select change="onChangeStatus" items="{ path: '/jbmeeting_base_Participants'}" width="100%">
+						<core:ListItem text="{MeetingRoleText}" key="{MeetingHeaderID}"/>
+					</Select>
+					<l:VerticalLayout width="100%">
+						<Label text="Question" class="sapUiTinyMarginTop"/>
+						<TextArea width="100%"></TextArea>
+					</l:VerticalLayout>
+					<l:VerticalLayout width="100%">
+						<Label text="Resolution" class="sapUiTinyMarginTop"/>
+						<TextArea width="100%"></TextArea>
+					</l:VerticalLayout>
+				</l:VerticalLayout>
+			</content>
+			<footer>
+				<Toolbar>
+					<ToolbarSpacer/>
+					<Button text="Add" press="onAgendaCreate" type="Emphasized"/>
+					<Button text="Cancel" press="onDialogClose"/>
+				</Toolbar>
+			</footer>
+		</Page>
+	</Dialog>
+</core:FragmentDefinition>

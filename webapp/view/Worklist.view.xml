@@ -1,0 +1,144 @@
+<mvc:View controllerName="jbmeeting.MeetingManager.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:semantic="sap.f.semantic" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:f="sap.f" xmlns:unified="sap.ui.unified">
+	<semantic:SemanticPage id="page" headerPinnable="false" preserveHeaderStateOnScroll="false" class="sapUiNoContentPadding">
+		<semantic:titleHeading>
+			<HBox alignItems="Center">
+				<core:Icon src="sap-icon://video" color="Critical" class="sapUiTinyMarginEnd"/>
+				<Title text="{i18n>worklistTitle}"/>
+			</HBox>
+		</semantic:titleHeading>
+		<semantic:titleCustomTextActions></semantic:titleCustomTextActions>
+		<semantic:headerContent>
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="jbmeeting_base_MeetingHeaders"  liveMode="true" enableBasicSearch="false"
+				useToolbar="true" useDateRangeType="true" considerSelectionVariants="true" persistencyKey="pk_MeetingHeadersSF">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="DateFrom" label="Date Period"
+						conditionType="{ module: 'sap.ui.comp.config.condition.DateRangeType', ignoreTime: false, operations: { filter: [ {path: 'category', contains: 'MONTH', exclude:true}, {path: 'category', contains: 'QUARTER', exclude:true}, {path: 'key', equals: 'TO', exclude:true} ] } }"
+						visibleInAdvancedArea="true"/>
+				</smartFilterBar:controlConfiguration>
+				<smartFilterBar:layoutData>
+					<FlexItemData shrinkFactor="0"/>
+				</smartFilterBar:layoutData>
+			</smartFilterBar:SmartFilterBar>
+		</semantic:headerContent>
+		<semantic:content>
+			<IconTabBar id="idIconTabBar" tabDensityMode="Compact" class="sapUiNoContentPadding" selectedKey="calendar">
+				<items>
+					<IconTabFilter text="List" icon="sap-icon://list" iconColor="Positive" key="list">
+						<!--<smartTable:SmartTable id="listWL" smartFilterId="smartFilterBar" useExportToExcel="false" beforeExport="onBeforeExport"-->
+						<!--				persistencyKey="pk_vTasksListST" placeToolbarInTable="true" tableType="ResponsiveTable" entitySet="jbmeeting_base_MeetingHeaders" header=" "-->
+						<!--				editTogglable="false" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" enableAutoBinding="true"-->
+						<!--				showFullScreenButton="false" beforeRebindTable="onBeforeRebindListTable">-->
+						<!--				<smartTable:customToolbar>-->
+						<!--					<OverflowToolbar design="Transparent">-->
+						<!--						<ToolbarSpacer/>-->
+						<!--						<OverflowToolbarButton text="{i18n&gt;ttRefresh}" tooltip="{i18n&gt;ttRefresh}" icon="sap-icon://refresh" type="Default"-->
+						<!--							press="onPressListRefresh" enabled="{= (${worklistView>/CreateNew} !== true) &amp;&amp; (${worklistView>/EditMode} !== true)}"/>-->
+						<!--					</OverflowToolbar>-->
+						<!--				</smartTable:customToolbar>-->
+						<!--				<Table id="table" sticky="ColumnHeaders,HeaderToolbar" mode="SingleSelectMaster" selectionChange="onSelectionChange"-->
+						<!--					popinLayout="GridSmall" updateFinished="onUpdateFinished" growingScrollToLoad="true">-->
+						<!--					<columns>-->
+						<!--						<Column width="6em" customData:p13nData='\{"leadingProperty":"MeetingHeaderID", "columnIndex":"1", "columnKey":"MeetingHeaderID", "sortProperty":"MeetingHeaderID"}'-->
+						<!--							visible="true"><Text text="{i18n>tTaskKey}"/>-->
+						<!--						</Column>-->
+						<!--					</columns>-->
+						<!--					<items>-->
+						<!--						<ColumnListItem id="columnlistitemWL" type="Active">-->
+						<!--							<Text text="{MeetingHeaderID}"/>-->
+						<!--						</ColumnListItem>-->
+						<!--					</items>-->
+						<!--				</Table>-->
+						<!--			</smartTable:SmartTable>-->
+						<!--<smartTable:SmartTable placeToolbarInTable="true" useVariantManagement="true" entitySet="jbmeeting_base_MeetingHeaders"-->
+						<!--	smartFilterId="smartFilterBar" useExportToExcel="false" persistencyKey="pk_MeetingHeadersSF2" editTogglable="false" useTablePersonalisation="true" showRowCount="true" enableAutoBinding="true">-->
+						<!--	<smartTable:customToolbar>-->
+						<!--		<OverflowToolbar class="stickyToolbar" design="Transparent" visible="{ViewModel>/CreateEditHeader/btnVisible/OverflowToolbar}">-->
+						<!--			<Title text="{worklistView>/worklistTableTitle}"/>-->
+						<!--			<ToolbarSpacer/>-->
+						<!--			<Button type="Emphasized" text="Create" tooltip="Add new meeting" press="onMeetingCreate"/>-->
+						<!--		</OverflowToolbar>-->
+						<!--	</smartTable:customToolbar>-->
+							<Table sticky="HeaderToolbar" id="table" popinLayout="GridSmall" width="auto" alternateRowColors="true"
+								items="{ path: '/jbmeeting_base_MeetingHeaders', sorter: { path: 'DateTo', descending: false } }"
+								noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true"
+								updateFinished="onUpdateFinished">
+								<columns>
+									<Column width="60%">
+										<Text text="Meeting header"/>
+									</Column>
+									<Column width="15%">
+										<Text text="Date and Time"/>
+									</Column>
+									<Column width="10%" demandPopin="true" minScreenWidth="Medium">
+										<Text text="Status"/>
+									</Column>
+									<Column width="10%" demandPopin="true" minScreenWidth="Medium">
+										<Text text="Type"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="10000px">
+										<Text text="Project"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="10000px">
+										<Text text="Location"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="10000px">
+										<Text text="Participants"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Navigation" press="onPress">
+										<cells>
+											<ObjectIdentifier title="{MeetingHeaderText}"/>
+											<Text
+												text="{path: 'DateFrom' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'EE, d MMM' } } · {path: 'DateFrom' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'HH:mm' } } – {path: 'DateTo' , type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'HH:mm' } } "/>
+											<HBox>
+												<core:Icon src="{MeetingStatusIcon}" color="{MeetingStatusIconColor}" class="sapUiTinyMarginEnd"/>
+												<Text text="{MeetingStatusText}"/>
+											</HBox>
+											<HBox>
+												<core:Icon src="{MeetingTypeIcon}" class="sapUiTinyMarginEnd"/>
+												<Text text="{MeetingTypeText}"/>
+											</HBox>
+											<Text text="jbmeeting: Разработка модуля"/>
+											<Text text="{Location} "/>
+											<f:AvatarGroup groupType="Group" avatarDisplaySize="XS" press="onGroupPress"
+												items="{path: 'jbmeeting_base_MeetingHeaders__jbmeeting_base_Participants', templateShareable: false}">
+												<f:AvatarGroupItem initials="{EmployeeText}" src="{AvatarURL_16x16}"/>
+											</f:AvatarGroup>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						<!--</smartTable:SmartTable>-->
+					</IconTabFilter>
+					<IconTabFilter text="Calendar" icon="sap-icon://appointment" iconColor="Critical" key="calendar">
+						<SinglePlanningCalendar title="My Calendar" viewChange="handleViewChange" appointmentSelect="handleAppointmentSelect"
+							headerDateSelect="handleHeaderDateSelect" startDateChange="handleStartDateChange" appointmentDrop="handleAppointmentDrop"
+							appointmentResize="handleAppointmentResize" appointmentCreate="handleAppointmentCreateDnD" moreLinkPress="handleMoreLinkPress"
+							appointments="{path: '/jbmeeting_base_MeetingHeaders'}" stickyMode="All">
+							<actions>
+								<Button text="Create" press="onMeetingCreate" tooltip="Add new meeting" type="Emphasized"/>
+								<Button id="legendButton" icon="sap-icon://legend" press="handleOpenLegend" tooltip="Open Calendar legend" ariaHasPopup="Dialog"/>
+							</actions>
+							<views>
+								<SinglePlanningCalendarDayView key="DayView" title="Day"/>
+								<SinglePlanningCalendarWorkWeekView key="WorkWeekView" title="Work Week"/>
+								<SinglePlanningCalendarWeekView key="WeekView" title="Week"/>
+								<SinglePlanningCalendarMonthView key="MonthView" title="Month"/>
+							</views>
+							<appointments>
+								<unified:CalendarAppointment title="{MeetingHeaderText}" text="{MeetingHeaderDescription}" icon="{MeetingTypeIcon}" startDate="{DateFrom}"
+									endDate="{DateTo}"></unified:CalendarAppointment>
+							</appointments>
+						</SinglePlanningCalendar>
+					</IconTabFilter>
+					<IconTabFilter text="Analysis" icon="sap-icon://table-chart" iconColor="Negative" key="analysis">
+						<Text text="Analytical table go here ..."/>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>

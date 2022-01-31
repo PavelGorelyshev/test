@@ -1,0 +1,17 @@
+<smartchart:SmartChart id="smartChartGeneral" settingEntity="jbcommon_settings_Logs" beforeRebindChart="onBeforeRebindChart"
+	enableAutoBinding="true" entitySet="jbcommon_log_Logs" useVariantManagement="true" persistencyKey="logViewerSmartChart"
+	useChartPersonalisation="true" smartFilterId="filter" header="" showFullScreenButton="true" selectionMode="Multi" showChartTooltip="true"
+	showDrillBreadcrumbs="false" showDetailsButton="false" showDrillButtons="true" showSemanticNavigationButton="true" height="100%">
+	<smartchart:toolbar>
+		<Toolbar id="TB1">
+			<SegmentedButton id="ChartSB" selectedKey="Chart">
+				<items>
+					<SegmentedButtonItem icon="{i18n>iTableView}" key="Table" press="handleNav"/>
+					<SegmentedButtonItem icon="{i18n>iTableChart}" key="Analytical" press="handleNav"/>
+					<SegmentedButtonItem icon="{i18n>iBarChart}" key="Chart" press="handleNav"/>
+				</items>
+			</SegmentedButton>
+			<ToolbarSpacer/>
+		</Toolbar>
+	</smartchart:toolbar>
+</smartchart:SmartChart>
